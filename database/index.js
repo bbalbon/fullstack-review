@@ -10,22 +10,27 @@ let repoSchema = mongoose.Schema({
   stars: Number
 });
 
-let Repo = mongoose.model('Repo', repoSchema);
+Repo = mongoose.model('Repo', repoSchema);
 
 let save = (repositories) => {
-  let data = repositories[0];
-  console.log(data);
-  Repo.create({
-    username: `${data.owner.login}`,
-    repoName: `${data.name}`,
-    forks: `${data.forks}`,
-    stars: `${data.stargazers_count}`
-  }, (err, repo) => {
-    if (err) throw err;
+  return new Promise ((resolve, reject) => {
+    let mapped = repositories.map(repo => {
+      return {
+        username: `${repo.owner.login}`,
+        repoName: `${repo.name}`,
+        forks: `${repo.forks}`,
+        stars: `${repo.stargazers_count}`
+      }
+    })
+    Repo.insertMany(mapped, (err, docs) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(docs);
+      }
+    })
   })
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
 }
 
 module.exports.save = save;
+module.exports.Repo = Repo;

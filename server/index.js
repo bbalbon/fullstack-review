@@ -12,11 +12,19 @@ app.post('/repos', function (req, res) {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
-  gitHub.getReposByUsername(req.body.input)
-    .then((data) => {
-      return db.save(data);
-    })
-  res.send();
+  // find all in db for res.body.inpout which is user typed input
+  Repo.findOne({'username': `${req.body.input}`}, (err, person) => {
+    if (err) {
+      return err;
+    } else {
+      if (!person) {
+        gitHub.getReposByUsername(req.body.input)
+        .then((reposFromGitHub) => {
+          return db.save(reposFromGitHub);
+        })
+      }
+    }
+  })
 });
 
 app.get('/repos', function (req, res) {
