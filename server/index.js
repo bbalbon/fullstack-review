@@ -8,16 +8,12 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(parser.urlencoded({extended: true}));
 
 app.post('/repos', function (req, res) {
-  Repo.findOne({'username': `${req.body.input}`}, (err, person) => {
-    if (err) {
-      return err;
-    } else {
-      if (!person) {
-        gitHub.getReposByUsername(req.body.input)
-          .then((reposFromGitHub) => {
-            return db.save(reposFromGitHub);
-          })
-      }
+  Repo.findOne({'username': `${req.body.input}`}).then((person) => {
+    if (!person) {
+      gitHub.getReposByUsername(req.body.input)
+        .then((reposFromGitHub) => {
+          return db.save(reposFromGitHub);
+        })
     }
   })
 });
@@ -25,7 +21,9 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
-  
+  Repo.find({}).then((results) => {
+    res.send(results);
+  })
 });
 
 let port = 1128;

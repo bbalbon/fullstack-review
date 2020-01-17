@@ -15,25 +15,19 @@ let repoSchema = mongoose.Schema({
 Repo = mongoose.model('Repo', repoSchema);
 
 let save = (repositories) => {
-  return new Promise ((resolve, reject) => {
-    let mapped = repositories.map(repo => {
-      return {
-        username: `${repo.owner.login}`,
-        repoName: `${repo.name}`,
-        forks: `${repo.forks}`,
-        stars: `${repo.stargazers_count}`,
-        picture: `${repo.owner.avatar_url}`,
-        size: `${repo.size}`
-      }
-    })
-    Repo.insertMany(mapped, (err, docs) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(docs);
-      }
-    })
+  let mapped = repositories.map(repo => {
+    return {
+      username: `${repo.owner.login}`,
+      repoName: `${repo.name}`,
+      forks: `${repo.forks}`,
+      stars: `${repo.stargazers_count}`,
+      picture: `${repo.owner.avatar_url}`,
+      size: `${repo.size}`
+    }
   })
+  Repo.insertMany(mapped).then((docs) => {
+    return docs;
+  });
 }
 
 module.exports.save = save;
