@@ -7,7 +7,8 @@ let repoSchema = mongoose.Schema({
   username: String,
   repoName: String,
   forks: Number,
-  stars: Number
+  stars: Number,
+  picture: String
 });
 
 Repo = mongoose.model('Repo', repoSchema);
@@ -19,7 +20,8 @@ let save = (repositories) => {
         username: `${repo.owner.login}`,
         repoName: `${repo.name}`,
         forks: `${repo.forks}`,
-        stars: `${repo.stargazers_count}`
+        stars: `${repo.stargazers_count}`,
+        picture: `${repo.owner.avatar_url}`
       }
     })
     Repo.insertMany(mapped, (err, docs) => {
