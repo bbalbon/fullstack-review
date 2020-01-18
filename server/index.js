@@ -15,6 +15,12 @@ app.post('/repos', function (req, res) {
         .then((reposFromGitHub) => {
           return db.save(reposFromGitHub);
         })
+        .then(() => {
+          Repo.find({}).then((results) => {
+            let sortedRepoArray = sorter.sortRepos(results);
+            res.send(sortedRepoArray.slice(0, 25));
+          })
+        })
     }
   })
 });

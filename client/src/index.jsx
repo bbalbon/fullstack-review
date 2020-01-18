@@ -32,7 +32,12 @@ class App extends React.Component {
       data: {
         input: `${term}`
       },
-      success: () => {}
+      success: (data) => {
+        console.log(data);
+        this.setState({
+          repos: data
+        })
+      }
     })
   }
 
