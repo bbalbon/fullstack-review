@@ -12,9 +12,20 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount () {
+    $.ajax({
+      type: 'GET',
+      url: '/repos',
+      success: (data) => {
+        this.setState({
+          repos: data
+        })
+      }
+    })
+  }
+
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
     $.ajax({
       type: 'POST',
       url: '/repos',
