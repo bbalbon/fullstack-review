@@ -6,19 +6,19 @@ const RepoListEntry = (props) => (
       <img src={props.repo.picture} className="avatar"/>
     </td>
     <td>
-    <h3 id="username">{props.repo.username}</h3>
+    <h3 className="username">{props.repo.username}</h3>
     </td>
     <td>
-      <h3 id="reponame">{props.repo.repoName}</h3>
+      <h3 className="reponame">{props.repo.repoName}</h3>
     </td>
     <td>
-      <h3 id="forks"> Forks: {props.repo.forks}</h3>
+      <h3 className="forks"> Forks: {props.repo.forks}</h3>
     </td>
     <td>
-      <h3 id="stars"> Stars: {props.repo.stars}</h3>
+      <h3 className="stars"> Stars: {props.repo.stars}</h3>
     </td>
     <td>
-      <h3 id="size"> Size: {props.repo.size}</h3>
+      <h3 className="size"> Size: {props.repo.size}</h3>
     </td>
   </tr>
 )
