@@ -6,10 +6,10 @@ const RepoListEntry = (props) => (
       <img src={props.repo.picture} className="avatar"/>
     </td>
     <td className="usernamebackground">
-      <a href="https://www.google.com" className="username" target="_blank">{props.repo.username}</a>
+      <h3 className="username">{props.repo.username}</h3>
     </td>
-    <td>
-      <h3 className="reponame">{props.repo.repoName}</h3>
+    <td className="reponamebackground">
+      <a href={`${props.repo.url}`} className="reponame" target="_blank">{props.repo.repoName}</a>
     </td>
     <td className="forksbackground">
       <h3 className="forks"> Forks: {props.repo.forks}</h3>

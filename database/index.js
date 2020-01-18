@@ -9,7 +9,8 @@ let repoSchema = mongoose.Schema({
   forks: Number,
   stars: Number,
   picture: String,
-  size: Number
+  size: Number,
+  url: String
 });
 
 Repo = mongoose.model('Repo', repoSchema);
@@ -22,7 +23,8 @@ let save = (repositories) => {
       forks: `${repo.forks}`,
       stars: `${repo.stargazers_count}`,
       picture: `${repo.owner.avatar_url}`,
-      size: `${repo.size}`
+      size: `${repo.size}`,
+      url: `${repo.html_url}`
     }
   })
   Repo.insertMany(mapped).then((docs) => {
