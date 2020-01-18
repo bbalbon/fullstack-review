@@ -18,24 +18,29 @@ class App extends React.Component {
       url: '/repos',
       success: (data) => {
         this.setState({
-          repos: data
+          repos : data
         })
       }
     })
   }
 
   search (term) {
-    console.log(`${term} was searched`);
     $.ajax({
       type: 'POST',
       url: '/repos',
       data: {
         input: `${term}`
       },
-      success: (data) => {
-        console.log(data);
-        this.setState({
-          repos: data
+      success: () => {
+        console.log('hit');
+        $.ajax({
+          type: 'GET',
+          url: '/repos',
+          success: (data) => {
+            this.setState({
+              repos : data
+            })
+          }
         })
       }
     })
