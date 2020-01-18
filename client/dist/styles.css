@@ -1,6 +1,7 @@
 body {
   margin: auto;
   text-align: center;
+  font-family: Roboto;
 }
 
 .avatar {
@@ -9,15 +10,11 @@ body {
   float: left;
 }
 
-#username {
-  float: middle;
+#repolist {
+  margin:auto;
+  text-align: center;
 }
 
-#reponame {
-  float: right;
-}
-
-.repo {
-  height: 50px;
-
+td {
+  border: solid black 1px;
 }
