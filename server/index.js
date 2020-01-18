@@ -3,6 +3,7 @@ const app = express();
 const parser = require('body-parser');
 const gitHub = require('../helpers/github.js');
 const db = require('../database/index.js');
+const sorter = require('../helpers/sizesorter.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(parser.urlencoded({extended: true}));
@@ -19,10 +20,9 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
   Repo.find({}).then((results) => {
-    res.send(results);
+    let sortedRepoArray = sorter.sort(results);
+    console.log(sortedRepoArray);
   })
 });
 
