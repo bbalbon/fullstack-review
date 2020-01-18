@@ -1,4 +1,4 @@
-const sort = (repoArray) => {
+const sortRepos = (repoArray) => {
   let sorted = false;
 
   while (!sorted) {
@@ -18,4 +18,4 @@ const sort = (repoArray) => {
   return repoArray;
 }
 
-module.exports.sort = sort;
+module.exports.sortRepos = sortRepos;

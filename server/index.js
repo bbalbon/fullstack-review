@@ -21,8 +21,8 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   Repo.find({}).then((results) => {
-    let sortedRepoArray = sorter.sort(results);
-    console.log(sortedRepoArray);
+    let sortedRepoArray = sorter.sortRepos(results);
+    res.send(sortedRepoArray.slice(0, 25))
   })
 });
 
