@@ -1,0 +1,23 @@
+body {
+  margin: auto;
+  text-align: center;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+#username {
+  float: middle;
+}
+
+#reponame {
+  float: right;
+}
+
+.repo {
+  height: 50px;
+
+}
