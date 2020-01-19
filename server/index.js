@@ -3,7 +3,6 @@ const app = express();
 const parser = require('body-parser');
 const gitHub = require('../helpers/github.js');
 const db = require('../database/index.js');
-const sorter = require('../helpers/sizesorter.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(parser.urlencoded({extended: true}));
@@ -23,9 +22,8 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  Repo.find({}).then((results) => {
-    let sortedRepoArray = sorter.sortRepos(results);
-    res.send(sortedRepoArray.slice(0, 25))
+  Repo.find({}).sort({"size" : -1}).limit(25).then((results) => {
+    res.send(results);
   })
 });
 
